@@ -1,3 +1,4 @@
+//Setting Game Q&A Arrays
 var cocktails = [
   {
     question: "This drink is traditionally made by stirring 2 parts whiskey, 1 part sweet vermouth, & 2 dashes Angostura bitters over ice.  Garnished with with orange peel and cherry",
@@ -141,7 +142,7 @@ var wines = [
     correctAnswer: 0
   },
   {
-    question: "Thiw wine is made from a dry light-bodied white grape that is planted heavily in Italy, but also in France and Germany. Wines are light to middle-weight and easy drinking, often with some bitter flavor on the palate (bitter almond, quinine)",
+    question: "This wine is made from a dry light-bodied white grape that is planted heavily in Italy, but also in France and Germany. Wines are light to middle-weight and easy drinking, often with some bitter flavor on the palate (bitter almond, quinine)",
     answerArr: ["Prosecco", "Riesling", "Moscato", "Pinot Gris"],
     correctAnswer: 3
   },
@@ -156,3 +157,94 @@ var wines = [
     correctAnswer: 3
   },
 ]
+
+// setting global vars to be used for game interaction
+var gifArr = ["cocktailWrong", "cocktailCorrect", "beerWrong", "beerCorrect", "wineWrong", "wineCorrect"]
+var messages = {
+	correct: "You got it!!",
+	incorrect: "Nope, too bad!!  Take a sip? ",
+	endTime: "You're out of time!",
+	finished: "That's it!  Let's see how you did!"
+}
+var intervalId = 0;
+var seconds = 15;
+var numberWrong = 0;
+var numberRight = 0;
+var numberUnanswered = 0;
+var questionNumber = 0;
+var choice;
+var cocktailHour = false;
+var beerTier = false;
+var wineTime = false;
+
+//initial showing and hiding
+$("#instructionsDiv").show();
+$("#categoryPickerDiv").hide();
+$("#triviaGameDiv").hide();
+$("#feedbackDiv").hide();
+$("#gameOverDiv").hide();
+
+//start and reset button click events to get to categories choices
+$("#startBtn").on("click", function(){
+	$("#instructionsDiv").hide();
+  $("#categoryPickerDiv").show();
+  $("#triviaGameDiv").hide();
+  $("#feedbackDiv").hide();
+  $("#gameOverDiv").hide();
+});
+
+$("#goAgainBtn").on("click", function(){
+	$("#instructionsDiv").hide();
+  $("#categoryPickerDiv").show();
+  $("#triviaGameDiv").hide();
+  $("#feedbackDiv").hide();
+  $("#gameOverDiv").hide();
+});
+
+//category page logic
+$("#cocktailBtn").on("click", function() {
+  cocktailHour = true ;
+  triviaTime();
+})
+
+$("#wineBtn").on("click", function() {
+  wineTime = true ;
+  triviaTime();
+})
+
+$("#beerBtn").on("click", function() {
+  beerTier = true ;
+  triviaTime();
+})
+
+//function to build the game based on category selection
+function triviaTime() {
+  $("#instructionsDiv").hide();
+  $("#categoryPickerDiv").hide();
+  $("#triviaGameDiv").show();
+  $("#feedbackDiv").hide();
+  $("#gameOverDiv").hide();
+  if (cocktailHour === true) {
+    questions(cocktails);
+    seconds = 10
+  }
+  else if (wineTime === true) {
+    questions(wines);
+    seconds = 15
+  }
+  else if (beerTier === true) {
+    questions(beers);
+    seconds = 15
+  }
+  $("#timeKeeper").text(seconds);
+  intervalId=setInterval(timeReducer, 1000)
+}
+
+//Timer Function
+function timeReducer() {
+  seconds--;
+  ("#timeKeeper").text(seconds)
+  if (seconds <= 0) {
+    endOfGame();
+  }
+}

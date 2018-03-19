@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Boozy Trivia Time!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">  
+  <link href="https://fonts.googleapis.com/css?family=Oleo+Script|Oswald" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Boozy Trivia Time!</h1>
+  </header>
+
+  <div id="instructionsDiv">
+    <p class="instructionsPara"> Test your knowledge of classic cocktail recipes, types of beer, and varities of wine!  In each category you'll be presented with 10 timed questions.  Check your knowledge, and learn some fun facts!</p>
+    <button id="startBtn"> Pick Your Category! </button>
+  </div>
+
+  <div id="categoryPickerDiv">
+    <p class="instructionsPara"> Pick Your Category! </p>
+    <button id="cocktailBtn" class="categoryBtn"> Cocktail Hour! </button>
+		<br/><br/>
+		<button id="wineBtn" class="categoryBtn"> Time for Some Wine </button>
+		<br/><br/>
+		<button id="beerBtn" class="categoryBtn"> Take on the Beer Tier</button>
+	</div>
+
+  <div id="triviaGameDiv">
+		<table >
+			<tr>
+				<th id="question">?</th>
+			</tr>
+			<tr class="choiceDiv">
+				<td id="choice1" class="choices">1</td>
+				<td id="choice2" class="choices">2</td>
+			</tr>
+			<tr class="choiceDiv">
+				<td id="choice3" class="choices">3</td>
+				<td id="choice4" class="choices">4</td>
+      </tr>
+      <tr>
+        <td id="timeKeeper">hi</td>
+      </tr>
+		</table>
+  </div>
+  
+  <div id="feedbackDiv">
+		<div id="message"></div>
+		<div id="result"></div>
+		<div id=correctAnswer></div>
+		<img id=imageResult></img>
+	</div>
+
+	<div id="gameOverDiv">
+		<h2>Game Over</h2>
+    <div> Number Wrong: <span id="numWrong"></span></div>
+    <div> Number Correct: <span id="numCorrect"></span></div>
+    <div> Number Unanswered: <span id="numUnanswered"></span></div>
+    <div> Your Score: <span id="scorePercent"></span></div>
+    <div> Total Time: <span id="totalTime"></span></div>
+    <button id="goAgainBtn"> Choose Another Category! </button>
+	</div>
+
+	<footer>
+		Copyright &copy; 2018 Joe Wright, Available for Hire.
+	</footer>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="assets/javascript/app.js"></script>
+	
+</body>
+
+</html>
+
+</body>
