@@ -162,9 +162,9 @@ var wines = [
 var gifArr = ["cocktailWrong", "cocktailCorrect", "beerWrong", "beerCorrect", "wineWrong", "wineCorrect"]
 var messages = {
 	correct: "You got it!!",
-	incorrect: "Nope, too bad!!  Take a sip? ",
-	endTime: "You're out of time!",
-	finished: "That's it!  Let's see how you did!"
+	wrong: "Nope, too bad!!  Take a sip? ",
+	outOfTime: "You're out of time!",
+	complete: "That's it!  Let's see how you did!"
 }
 var intervalId = 0;
 var seconds = 15;
@@ -176,6 +176,7 @@ var choice;
 var cocktailHour = false;
 var beerTier = false;
 var wineTime = false;
+var answered = false;
 
 //initial showing and hiding
 $("#instructionsDiv").show();
@@ -204,17 +205,17 @@ $("#goAgainBtn").on("click", function(){
 //category page logic
 $("#cocktailBtn").on("click", function() {
   cocktailHour = true ;
-  triviaTime();
+  triviaTime(cocktails);
 })
 
 $("#wineBtn").on("click", function() {
   wineTime = true ;
-  triviaTime();
+  triviaTime(wines);
 })
 
 $("#beerBtn").on("click", function() {
   beerTier = true ;
-  triviaTime();
+  triviaTime(beers);
 })
 
 //function to build the game based on category selection
@@ -224,27 +225,122 @@ function triviaTime() {
   $("#triviaGameDiv").show();
   $("#feedbackDiv").hide();
   $("#gameOverDiv").hide();
+  $("#timeKeeper").text(seconds);
+  intervalId=setInterval(timeReducer, 1000)
   if (cocktailHour === true) {
-    questions(cocktails);
-    seconds = 10
+    theRiddler(cocktails);
+    seconds = 15
   }
   else if (wineTime === true) {
-    questions(wines);
+    theRiddler(wines);
     seconds = 15
   }
   else if (beerTier === true) {
-    questions(beers);
+    theRiddler(beers);
     seconds = 15
   }
-  $("#timeKeeper").text(seconds);
-  intervalId=setInterval(timeReducer, 1000)
 }
 
-//Timer Function
+//function to populate questions
+function theRiddler(category) {
+  $("#question").html(category[questionNumber].question);
+  for(var i = 0; i < 4; i++){
+		var choices = $("<p>");
+		choices.text(category[questionNumber].answerArr[i]);
+		choices.attr({"data-index": i });
+		choices.addClass("choiceBtn btn btn-info");
+    $("#choiceDiv").append(choices);
+  }
+  $(".choiceBtn").on("click",function(){
+    console.log("choice clicked")
+    answered = true ;
+    choice = $(this).data("index");
+    clearInterval(intervalId);
+    if (cocktailHour === true) {
+      factChecker(cocktails);
+      console.log(category + "riddlercat")
+    } 	
+    else if (beerTier === true) {
+      factChecker(beers);
+    } 	
+    else if (wineTime === true) {
+      factChecker(wines);
+    }
+  });
+}
+
+
+
+//checks answers
+function factChecker(category) {
+  console.log(questionNumber)
+  console.log(category)
+  var correctText = category[questionNumber].answerArr[category[questionNumber].correctAnswer];
+  var correctIndex = category[questionNumber].correctAnswer;
+  console.log(correctText)
+  console.log(correctIndex)
+  console.log(choice)
+  $("#instructionsDiv").hide();
+  $("#categoryPickerDiv").hide();
+  $("#triviaGameDiv").hide();
+  $("#feedbackDiv").show();
+  $("#gameOverDiv").hide();
+	//checks to see correct, incorrect, or unanswered
+	if((choice == correctIndex) && (answered == true)){
+    console.log("correct logic works")
+		numberRight++;
+    $("#message").html(messages.correct);
+    nextQuestion(category)
+  } 
+  else if((choice != correctIndex) && (answered == true)){
+		numberWrong++;
+		$('#message').html(messages.wrong);
+    $('#correctAnswer').html('The correct answer was: ' + correctText);
+    nextQuestion(category)
+  } 
+  else{
+		numberUnanswered++;
+		$('#message').html(messages.outofTime);
+		$('#correctAnswer').html('The correct answer was: ' + correctText);
+    answered = true;
+    nextQuestion(category)
+	}
+}
+
+function nextQuestion(category) {
+  questionNumber++
+  if (questionNumber === category.length) {
+    endOfGame(category)
+  }
+  else {
+    setTimeout( 
+      function() {
+      $("#choiceDiv").empty();
+      $("#message").empty();
+      $("#result").empty();
+      $("#correctAnswer").empty();
+      $("#imageResult").empty();
+      triviaTime(category)
+      }, 2500)
+  }
+}
+
+function endOfGame() {
+  $("#instructionsDiv").hide();
+  $("#categoryPickerDiv").hide();
+  $("#triviaGameDiv").hide();
+  $("#feedbackDiv").hide();
+  $("#gameOverDiv").show();
+  $("#numWrong").html(numberWrong)
+  $("#numCorrect").html(numberRight)
+  $("#numUnanswered").html(numberUnanswered)
+  $("#numWrong").html(numberWrong)
+  var scoreTime = (numberRight / 10)
+  $("#scorePercent").html(scoreTime)
+}
+
+//timer function
 function timeReducer() {
   seconds--;
-  ("#timeKeeper").text(seconds)
-  if (seconds <= 0) {
-    endOfGame();
-  }
+  $("#timeKeeper").html(seconds)
 }
