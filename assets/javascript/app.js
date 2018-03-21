@@ -180,7 +180,7 @@ $("#gameOverDiv").hide();
 
 //start and reset button click events to get to categories choices
 $("#startBtn").on("click", function(){
-	$("#instructionsDiv").hide();
+  $("#instructionsDiv").hide();
   $("#categoryPickerDiv").show();
   $("#triviaGameDiv").hide();
   $("#feedbackDiv").hide();
@@ -253,8 +253,8 @@ function theRiddler(category) {
   $("#question").html(category[questionNumber].question);
   for(var i = 0; i < 4; i++){
     var choices = $("<p>");
-		choices.text(category[questionNumber].answerArr[i]);
-		choices.attr({"data-index": i });
+    choices.text(category[questionNumber].answerArr[i]);
+    choices.attr({"data-index": i });
     choices.addClass("choiceBtn btn btn-info");
     $("#choiceDiv").append(choices);
     if (i == 1) {
@@ -288,8 +288,7 @@ function factChecker(category) {
   $("#triviaGameDiv").hide();
   $("#feedbackDiv").show();
   $("#gameOverDiv").hide();
-	//checks to see correct, incorrect, or unanswered
-	if(choice == correctIndex && answered == true){
+  if(choice == correctIndex && answered == true){
     console.log("correct logic works")
     numberRight++;
     $("#messageDiv").empty()
@@ -308,7 +307,7 @@ function factChecker(category) {
   else if (choice != correctIndex && answered == true) {
     numberWrong++;
     $("#messageDiv").empty()
-		$("#messageDiv").html("Nope, too bad!!  Take a sip? ");
+    $("#messageDiv").html("Nope, You're Wrong!!  Take a sip? ");
     $("#correctAnswer").html('The correct answer was: ' + correctText);
     if (cocktailHour === true) {
       $("#imageResult").attr("src", "assets/images/cocktailWrong.gif")
