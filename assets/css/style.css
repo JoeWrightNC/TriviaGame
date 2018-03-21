@@ -1,0 +1,42 @@
+body {
+  background-image: url("../images/boozeBackground.jpg");
+  font-family: 'Oswald', sans-serif;
+}
+
+#header {
+  height:25%;
+  font-family: 'Oleo Script', cursive;
+  text-align: center;
+  text-shadow: white 3px 3px;
+}
+
+#gameTron {
+  width:70%;
+  margin-top:10%;
+  margin-left:15%;
+  text-align: center;
+}
+
+.choiceBtn {
+  margin-right:5%;
+  margin-left:5%;
+}
+
+#question {
+  margin-bottom:3%;
+  width:70%;
+  margin-left:15%;
+}
+
+.my-4 {
+  width:80% !important;
+}
+
+.footer {
+  background-color:tan;
+  position: absolute;
+  bottom:0;
+  height:3%;
+  text-align:center;
+  width:100%;
+}
