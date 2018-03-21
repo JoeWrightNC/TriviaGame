@@ -86,7 +86,7 @@ var beers = [
   {
     question: "This beer is a dark style of beer developed in London from well-hopped beers made from brown malt. The name was first recorded in the 18th century",
     answerArr: ["Stout", "Cider", "Porter", "India Pale Ale"],
-    correctAnswer: 1
+    correctAnswer: 0
   },
   {
     question: "This name traditionally referred to the stronger variety of porters, but now refers to a dark beer that includes roasted malt or roasted barley, hops, water and yeast",
