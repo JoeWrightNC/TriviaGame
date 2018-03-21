@@ -12,7 +12,7 @@ body {
 
 #gameTron {
   width:70%;
-  margin-top:10%;
+  margin-top:5%;
   margin-left:15%;
   text-align: center;
 }
@@ -20,6 +20,9 @@ body {
 .choiceBtn {
   margin-right:5%;
   margin-left:5%;
+  width: 25%;
+  text-align: center;
+  padding:auto;
 }
 
 #question {
@@ -32,9 +35,17 @@ body {
   width:80% !important;
 }
 
+#goAgainBtn {
+  background-color:skyblue;
+}
+
+#imageResult {
+  width:60%;
+}
+
 .footer {
   background-color:tan;
-  position: absolute;
+  position: fixed;
   bottom:0;
   height:3%;
   text-align:center;
